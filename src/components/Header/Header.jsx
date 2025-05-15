@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import './Header.css'
 
 const Header = () => {
@@ -8,7 +9,9 @@ const Header = () => {
         <h1 className="header__title">
           идём<span className="header__title_weight">в</span>кино
         </h1>
-        <button className="header__btn">войти</button>
+        <Link to='/authorization'>
+            <button className="header__btn">войти</button>
+        </Link>
       </div>
     </header>
   );
