@@ -1,6 +1,7 @@
 import Header from "../../components/Header/Header";
 import Calendar from "../../components/Calendar/Calendar";
 import "./Main.css";
+import FilmList from "../../components/FilmList/FilmList";
 
 const Main = () => {
   return (
@@ -8,6 +9,7 @@ const Main = () => {
       <div className="main-container">
         <Header />
         <Calendar />
+        <FilmList/>
       </div>
     </main>
   );

@@ -17,7 +17,6 @@ const Calendar = () => {
   };
 
   const dates = getDatesToShow();
-  console.log(dates);
   return (
     <div className="calendar-container">
       <div className="calendar-header">
