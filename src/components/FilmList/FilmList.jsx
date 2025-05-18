@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FilmCard from "./FilmCard/FilmCard";
-
+import "./FilmList.css"
 const FilmList = () => {
   const [data, setData] = useState(null);
 
@@ -16,18 +16,16 @@ const FilmList = () => {
         console.log(error, "запрос не удался");
       }
     }
-    console.log("useEffect отработал");
 
     fetchData();
   }, []);
 
-  console.log(data);
   return (
-    <>
+    <div className="films-content">
       {data?.result.films.map((el)=>(
-        <FilmCard props={data.result.films}/>
+        <FilmCard key={el.id} props={el}/>
     ))}
-    </>
+    </div>
   );
 };
 
