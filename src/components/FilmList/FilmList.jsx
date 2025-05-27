@@ -21,11 +21,11 @@ const FilmList = () => {
   }, []);
 
   return (
-    <div className="films-content">
+    <ul className="films-content">
       {data?.result.films.map((el)=>(
         <FilmCard key={el.id} props={el}/>
     ))}
-    </div>
+    </ul>
   );
 };
 
