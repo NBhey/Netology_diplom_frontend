@@ -22,9 +22,12 @@ const FilmList = () => {
 
   return (
     <ul className="films-content">
-      {data?.result.films.map((el)=>(
-        <FilmCard key={el.id} props={el}/>
-    ))}
+      {data?.result.films.map((el)=>{
+        const filmSeances = data.result.seances.filter(
+        (seance) => seance.seance_filmid === el.id
+      );
+      return <FilmCard key={el.id} props={el} seances={filmSeances}/>
+})}
     </ul>
   );
 };

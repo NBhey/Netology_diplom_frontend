@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 
 import "./FilmCard.css"
 
-const FilmCard = ({ props }) => {
-  console.log(props, "Filmcard");
+const FilmCard = ({ props, seances }) => {
+  console.log(seances, "Filmcard");
 
   useEffect(()=>{
-    
+
   })
   return (
     <li >
@@ -20,7 +20,7 @@ const FilmCard = ({ props }) => {
             
         </div>
         <div>
-            
+            {}
         </div>
       
     </li>
