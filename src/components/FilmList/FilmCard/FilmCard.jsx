@@ -5,9 +5,7 @@ import "./FilmCard.css"
 const FilmCard = ({ props, seances }) => {
   console.log(seances, "Filmcard");
 
-  useEffect(()=>{
-
-  })
+ 
   return (
     <li >
         <div className="film-title">
@@ -17,10 +15,9 @@ const FilmCard = ({ props, seances }) => {
                 <p>{props.film_description}</p>
                 <p>{props.film_duration}</p>
             </div>
-            
         </div>
         <div>
-            {}
+           {seances[0]?.seance_time || null}
         </div>
       
     </li>
