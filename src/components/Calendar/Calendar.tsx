@@ -1,11 +1,10 @@
-import React from "react";
-import "./Calendar.css"; // Стили для компонента
+import './Calendar.css';
 
-const Calendar = () => {
+const Calendar: React.FC = () => {
   const currentDate = new Date();
-  const daysOfWeek = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+  const daysOfWeek: string[] = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-  const getDatesToShow = () => {
+  const getDatesToShow = (): Date[] => {
     const dates = [];
     for (let i = 0; i < 6; i++) {
       const date = new Date();

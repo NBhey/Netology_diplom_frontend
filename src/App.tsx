@@ -1,18 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import "./App.css";
 import Main from "./pages/Main/Main";
 import Authorization from "./pages/Authorization/Authorization";
 
-function App() {
+const App: React.FC = () =>  {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/authorization" element={<Authorization/>}/>
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
-
 export default App;

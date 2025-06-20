@@ -9,6 +9,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: 100vh; /* Это гарантирует, что блок будет минимум на весь экран */
+  position: relative; /* или fixed, в зависимости от ваших нужд */
 
 }
 
