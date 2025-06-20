@@ -3,7 +3,7 @@ name: Diplom_Netology
 on: 
   push:
     branches:
-      - dev
+      - master
 permissions:
   contents: write
 jobs:
