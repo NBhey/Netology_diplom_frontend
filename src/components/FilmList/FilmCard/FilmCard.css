@@ -1,3 +1,38 @@
-.film-title > img {
-    max-width: 125px;
+.film-card {
+  padding: 10px 10px 15px;
+  background-color: #f1ebe6f2;
+}
+
+.film-card__main-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(1, 1fr);
+  gap: 8px;
+}
+
+.film-card__image {
+  max-width: 125px;
+}
+
+.film-card__title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.film-card__title_description {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.film-card__title_duration {
+  font-weight: 300;
+  font-size: 14px;
 }

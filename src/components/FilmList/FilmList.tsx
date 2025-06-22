@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import FilmCard from './FilmCard/FilmCard';
 import './FilmList.css';
+import { HEAD_REQUEST_API as URL } from "src/constants/index"
 
 interface Film {
   id: number;
@@ -25,7 +26,7 @@ interface ApiResponse {
   };
 }
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://shfe-diplom.neto-server.ru/alldata';
+const API_URL = process.env.REACT_APP_API_URL || `${URL}alldata`;
 
 const FilmList: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
@@ -45,7 +46,7 @@ const FilmList: React.FC = () => {
   }, []);
 
   return (
-    <ul className="films-content">
+    <ul className="films-list">
       {data?.result.films.map((film) => {
         const filmSeances = data.result.seances.filter(
           (seance) => seance.seance_filmid === film.id,

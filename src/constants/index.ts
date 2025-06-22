@@ -1,0 +1,1 @@
+export const HEAD_REQUEST_API = 'https://shfe-diplom.neto-server.ru/';

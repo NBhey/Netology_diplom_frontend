@@ -22,20 +22,24 @@ interface FilmCardProps {
 }
 
 const FilmCard: React.FC<FilmCardProps> = ({ film, seances }) => {
-  console.log(seances, 'seance');
-  console.log(film, 'film');
-
+  const { film_description, film_duration, film_name, film_origin, film_poster, id } = film;
+  const film_origin_Upper_and_Slice = film_origin[0].toLocaleUpperCase() + film_origin.slice(1).toLowerCase();
+  
   return (
-    <li>
-      <div className="film-title">
-        <img src={film.film_poster} alt="постер" />
-        <div className="title">
-          <h3> {film.film_name} </h3>
-          <p>{film.film_description}</p>
-          <p>{film.film_duration}</p>
+    <li className="film-card">
+      <div className="film-card__main-content">
+        <img className="film-card__image" src={film_poster} alt="постер" />
+        <div className="film-card__title">
+          <h3> {film_name} </h3>
+          <p className='film-card__title_description'>{film_description}</p>
+          <p className='film-card__title_duration'>{film_duration} минут {film_origin_Upper_and_Slice}</p>
         </div>
       </div>
-      <div> {seances?.map((seance) => <span key={seance.id}>{seance.seance_time}</span>)} </div>
+      <div>
+        {seances?.length
+          ? seances.map((seance) => <span key={seance.id}>{seance.seance_time}</span>)
+          : 'Cеансы отсутствуют'}
+      </div>
     </li>
   );
 };
