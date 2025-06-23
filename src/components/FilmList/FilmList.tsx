@@ -12,6 +12,14 @@ interface Film {
   film_description: string;
 }
 
+interface Hall {
+  id: number;
+  hall_name: string;
+  hall_rows:number;
+  hall_places:number;
+  hall_config:[];
+}
+
 interface Seance {
   id: number;
   seance_filmid: number;
@@ -22,6 +30,7 @@ interface Seance {
 interface ApiResponse {
   result: {
     films: Film[];
+    halls: Hall [];
     seances: Seance[];
   };
 }
@@ -51,7 +60,7 @@ const FilmList: React.FC = () => {
         const filmSeances = data.result.seances.filter(
           (seance) => seance.seance_filmid === film.id,
         );
-        return <FilmCard key={film.id} film={film} seances={filmSeances} />;
+        return <FilmCard key={film.id} film={film} seances={filmSeances} halls={data?.result.halls}/>;
       })}
     </ul>
   );

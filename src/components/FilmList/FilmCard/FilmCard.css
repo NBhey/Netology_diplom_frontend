@@ -36,3 +36,33 @@
   font-weight: 300;
   font-size: 14px;
 }
+
+.film-card__hall {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.film-card__hall-title {
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.film-card__hall-time {
+  display: inline-block;
+  width: 53px;
+  height: 33px;
+  padding-top: 7.2px;
+  padding-right: 7.33px;
+  padding-bottom: 8.05px;
+  padding-left: 8px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.film-card__hall-time:not(:first-child) {
+  margin-left: 5px;
+}
