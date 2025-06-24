@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import FilmCard from './FilmCard/FilmCard';
 import './FilmList.css';
-import { HEAD_REQUEST_API as URL } from "src/constants/index"
+import {api} from '../../api/api'
+
 
 interface Film {
   id: number;
@@ -35,20 +36,18 @@ interface ApiResponse {
   };
 }
 
-const API_URL = process.env.REACT_APP_API_URL || `${URL}alldata`;
-
 const FilmList: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
-
+  
   useEffect(() => {
+    
     async function fetchData() {
-      try {
-        const response = await fetch(API_URL);
-        const data: ApiResponse = await response.json();
-        setData(data);
-      } catch (error) {
-        console.log(error, 'запрос не удался');
-      }
+     try {
+        const response = await api.get<ApiResponse>('/alldata');
+        setData(response);
+      } catch (err) {
+        console.log(err);
+      } 
     }
 
     fetchData();
