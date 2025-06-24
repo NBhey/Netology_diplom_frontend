@@ -9,7 +9,6 @@ const App: React.FC = () =>  {
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/authorization" element={<Authorization/>}/>
-
       </Routes>
     </HashRouter>
   );

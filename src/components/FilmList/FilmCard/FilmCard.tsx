@@ -50,7 +50,6 @@ const FilmCard: React.FC<FilmCardProps> = ({ film, seances, halls }) => {
       }
     });
   });
-  console.log(currentHallsObject);
 
   const currentHallsKeyArrays = Object.keys(currentHallsObject);
   return (
@@ -71,7 +70,7 @@ const FilmCard: React.FC<FilmCardProps> = ({ film, seances, halls }) => {
             ? currentHallsKeyArrays.map((key, i) => {
                 return (
                   <Fragment key={i}>
-                    <h3 className="film-card__hall-title"> {key} </h3>
+                    <h3 className="film-card__hall-title"> {key[0].toLocaleUpperCase() + key.slice(1).toLowerCase()} </h3>
                     <div>
                       {currentHallsObject[key].map((time: string, key: number) => {
                         return (

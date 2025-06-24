@@ -1,0 +1,28 @@
+.authorization-form {
+  max-width: 480px;
+  margin: 0 auto;
+
+  padding-bottom: 35px;
+  background-color: rgba(234, 233, 235, 0.95);
+}
+
+.authorization-form__title {
+  padding: 16px 104px;
+  background-color: rgba(99, 83, 108, 1);
+
+  text-align: center;
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 25px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.authorization-form__input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
