@@ -10,13 +10,13 @@ interface LocationData {
 }
 
 const Header: React.FC = () => {
-  const location: LocationData = useLocation();
-  
-  return location.pathname === '/authorization' ? (
+  const { pathname }: LocationData = useLocation();
+
+  return pathname === '/authorization' || pathname === '/admin' ? (
     <header className="header header_admin">
       <div className="header-wrapper header-wrapper_admin">
         <h1 className="header__title">
-          идём<span className="header__title_weight">в</span>кино 
+          идём<span className="header__title_weight">в</span>кино
         </h1>
         <h3 className="header__title_admin">Администраторская</h3>
       </div>

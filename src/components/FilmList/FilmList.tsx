@@ -2,39 +2,7 @@ import { useState, useEffect } from 'react';
 import FilmCard from './FilmCard/FilmCard';
 import './FilmList.css';
 import {api} from '../../api/api'
-
-
-interface Film {
-  id: number;
-  film_name: string;
-  film_duration: number;
-  film_origin: string;
-  film_poster: string;
-  film_description: string;
-}
-
-interface Hall {
-  id: number;
-  hall_name: string;
-  hall_rows:number;
-  hall_places:number;
-  hall_config:[];
-}
-
-interface Seance {
-  id: number;
-  seance_filmid: number;
-  seance_hallid: number;
-  seance_time: string;
-}
-
-interface ApiResponse {
-  result: {
-    films: Film[];
-    halls: Hall [];
-    seances: Seance[];
-  };
-}
+import { ApiResponse } from '../../types/apiType';
 
 const FilmList: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
