@@ -1,4 +1,4 @@
-import Header from '../../components/HeaderMain/Header';
+import Header from '../../components/Header/Header';
 import Calendar from '../../components/Calendar/Calendar';
 import './Main.css';
 import FilmList from '../../components/FilmList/FilmList';

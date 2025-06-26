@@ -11,15 +11,14 @@ interface LocationData {
 
 const Header: React.FC = () => {
   const location: LocationData = useLocation();
-  console.log(location);
-
+  
   return location.pathname === '/authorization' ? (
-    <header className="header">
+    <header className="header header_admin">
       <div className="header-wrapper header-wrapper_admin">
         <h1 className="header__title">
           идём<span className="header__title_weight">в</span>кино 
         </h1>
-        <h3>Администратовская</h3>
+        <h3 className="header__title_admin">Администраторская</h3>
       </div>
     </header>
   ) : (

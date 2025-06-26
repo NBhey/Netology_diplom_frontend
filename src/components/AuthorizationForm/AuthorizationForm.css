@@ -23,6 +23,53 @@
 }
 
 .authorization-form__input-wrapper {
+  padding: 35px 35px;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  vertical-align: middle;
+  color: rgba(132, 132, 132, 1);
+}
+
+.authorization-form__input-wrapper label p {
+  margin-bottom: 5px;
+}
+
+.authorization-form__input-wrapper input {
+  width: 272px;
+  height: 36px;
+  padding-top: 8px;
+  padding-right: 8.8px;
+  padding-bottom: 9px;
+  padding-left: 8.8px;
+
+
+  border-width: 1px;
+}
+
+.authorization-form__btn {
+  width: 189px;
+  height: 40px;
+  margin-top: 20px;
+
+  border-radius: 3px;
+  border: none;
+  background: rgba(22, 166, 175, 1);
+
+  color: rgba(255, 255, 255, 1);
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
 }
