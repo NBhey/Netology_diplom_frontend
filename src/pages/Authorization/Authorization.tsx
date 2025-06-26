@@ -1,13 +1,16 @@
-import React from "react"
-import './Authorization.css'
+import './Authorization.css';
+import AuthorizationForm from '../../components/AuthorizationForm/AuthorizationForm';
+import Header from '../../components/Header/Header';
 
-const Authorization = () => {
-    return (
-        <section className="authorization">
-            <form></form>
-        </section>
-        
-    )
-}
+const Authorization: React.FC = () => {
+  return (
+    <main className="authorization">
+      <div className="authorization-container">
+        <Header />
+        <AuthorizationForm />
+      </div>
+    </main>
+  );
+};
 
-export default Authorization
+export default Authorization;

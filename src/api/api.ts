@@ -15,7 +15,7 @@ class API {
             headers:{
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data)
+            body: typeof data !== 'string' ? JSON.stringify(data) : data,
         })
 
         return response.json() as Promise<T>
