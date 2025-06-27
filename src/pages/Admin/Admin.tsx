@@ -9,6 +9,7 @@ const Admin: React.FC = () => {
         <Header />
         <div className="hall-params">
             <ManagmentHall/>
+            <ManagmentHall/>
         </div>
       </div>
     </main>

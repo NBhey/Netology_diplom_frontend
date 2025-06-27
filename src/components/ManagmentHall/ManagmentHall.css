@@ -1,0 +1,89 @@
+.hall-params__managment {
+  width: 100%;
+}
+
+.hall-params__title {
+  padding: 25px 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 25px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+  background-color: rgba(99, 83, 108, 1);
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.hall-params__title h3 {
+  display: flex;
+  align-items: center;
+}
+
+.hall-params__title h3::before {
+  position: relative;
+  z-index: 1;
+  margin-right: 20px;
+  height: 44px;
+  content: url('./img/before.png');
+}
+
+.hall-params__img {
+  width: 24px;
+  height: 16px;
+  transition: transform 0.3s cubic-bezier(0.4, 1, 0.2, 2);
+}
+
+.hall-params__img_rotate {
+  width: 24px;
+  height: 16px;
+  transform: rotate(180deg);
+  transition: transform 0.3s cubic-bezier(0.4, 1, 0.2, 2);
+}
+
+.hall-params__configurate {
+  padding: 35px 32px 36px 104px;
+  background-color: rgba(234, 233, 235, 0.95);
+  transform: translateY(0px);
+  animation: fadeSlideDown 0.4s ease-out forwards;
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hall-params__configurate p {
+  margin-bottom: 10px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.hall-params__list {
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+  list-style-type: none;
+}
