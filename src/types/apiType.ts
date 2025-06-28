@@ -7,7 +7,7 @@ interface Film {
   film_description: string;
 }
 
-interface Hall {
+export interface Hall {
   id: number;
   hall_name: string;
   hall_rows: number;

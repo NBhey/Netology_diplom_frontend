@@ -11,8 +11,7 @@ interface LocationData {
 
 const Header: React.FC = () => {
   const { pathname }: LocationData = useLocation();
-
-  return pathname === '/authorization' || pathname === '/admin' ? (
+  return window.sessionStorage.getItem('admin') || pathname === '/authorization'  ? (
     <header className="header header_admin">
       <div className="header-wrapper header-wrapper_admin">
         <h1 className="header__title">
@@ -28,7 +27,7 @@ const Header: React.FC = () => {
           идём<span className="header__title_weight">в</span>кино
         </h1>
         <Link to="/authorization">
-          <button className="header__btn">войти</button>
+          <button className="btn header__btn">войти</button>
         </Link>
       </div>
     </header>

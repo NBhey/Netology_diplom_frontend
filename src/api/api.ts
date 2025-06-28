@@ -20,6 +20,14 @@ class API {
 
         return response.json() as Promise<T>
     }
+
+    async delete<T>(endpoint:number){
+        const response = await fetch(`${this.baseUrl}/hall/${endpoint}`,{
+            method:"DELETE"
+        })
+
+        return response.json() as Promise<T>
+    }
 }
 
 export const api = new API()
