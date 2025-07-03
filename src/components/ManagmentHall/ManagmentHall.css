@@ -2,54 +2,6 @@
   width: 100%;
 }
 
-.hall-params__title {
-  padding: 25px 40px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  font-family: Roboto;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 25px;
-  letter-spacing: 0.5px;
-  vertical-align: middle;
-  text-transform: uppercase;
-
-  background-color: rgba(99, 83, 108, 1);
-
-  color: rgba(255, 255, 255, 1);
-}
-
-.hall-params__title h3 {
-  display: flex;
-  align-items: center;
-}
-
-.hall-params__title h3::before {
-  position: relative;
-  z-index: 1;
-  margin-right: 20px;
-  height: 44px;
-  content: url('./img/before.png');
-}
-
-.hall-params__img {
-  width: 24px;
-  height: 16px;
-  transition: transform 0.3s cubic-bezier(0.4, 1, 0.2, 2);
-  cursor: pointer;
-}
-
-.hall-params__img_rotate {
-  width: 24px;
-  height: 16px;
-  transform: rotate(180deg);
-  transition: transform 0.3s cubic-bezier(0.4, 1, 0.2, 2);
-  cursor: pointer;
-}
-
 .hall-params__configurate {
   position: relative;
   padding: 35px 32px 36px 104px;

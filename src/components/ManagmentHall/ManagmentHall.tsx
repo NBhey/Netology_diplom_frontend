@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { api } from '../../api/api';
 import { ApiResponse, Hall } from '@/types/apiType';
 import './ManagmentHall.css';
-import image from './img/after.png';
+import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
 
 const ManagmentHall: React.FC = () => {
   const [halls, setHall] = useState<Array<Hall> | null>(null);
@@ -72,15 +72,12 @@ const ManagmentHall: React.FC = () => {
 
   return (
     <section className="hall-params__managment">
-      <div className="hall-params__title">
-        <h3>Управление залами</h3>
-        <img
-          className={arrowContent ? 'hall-params__img' : 'hall-params__img_rotate'}
-          onClick={handleClickForOpenHallConfig}
-          src={image}
-          alt="стрелка"
-        />
-      </div>
+      <HeaderForSectionInAdminPanel
+        title="Управление залами"
+        handleCLick={handleClickForOpenHallConfig}
+        arrowContent={arrowContent}
+      />
+
       {arrowContent ? (
         <div className="hall-params__configurate">
           <p>Доступные залы:</p>

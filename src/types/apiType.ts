@@ -1,4 +1,4 @@
-interface Film {
+export interface Film {
   id: number;
   film_name: string;
   film_duration: number;
@@ -15,7 +15,7 @@ export interface Hall {
   hall_config: [];
 }
 
-interface Seance {
+export interface Seance {
   id: number;
   seance_filmid: number;
   seance_hallid: number;
@@ -28,4 +28,10 @@ export interface ApiResponse {
     halls: Hall[];
     seances: Seance[];
   };
+}
+
+export interface inputHeaderForSectionInAdminPanel {
+  title: string;
+  arrowContent: boolean;
+  handleCLick: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
