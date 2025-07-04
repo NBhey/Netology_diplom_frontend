@@ -75,8 +75,8 @@ const ConfigurateHall: React.FC = () => {
           <div className="hall-sheme">
             <p>Теперь вы можете указать типы кресел на схеме зада: </p>
             <span><img src={standrt} alt="standart" /> - обычные кресла</span>
-            <span><img src={vip} alt="standart" /> - VIP кресла</span>
-            <span><img src={block} /> - заблокированные (нет кресла)</span>
+            <span><img src={vip} alt="vip" /> - VIP кресла</span>
+            <span><img src={block} alt="block"/> - заблокированные (нет кресла)</span>
           </div>
         </div>
       ) : null}
