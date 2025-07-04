@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import './AuthorizationForm.css';
 import { api } from '../../api/api';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 type FormData = {
   email: string;
@@ -15,10 +16,17 @@ const AuthorizationForm: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (window.sessionStorage.getItem('admin')) {
+      navigate('/admin');
+    }
+  });
+  
   const onSubmit = async (data: FormData) => {
     try {
       await api.post('/login', data);
       if (data.email === EMAIL && data.password === PASSWORD) {
+        window.sessionStorage.setItem('admin', EMAIL);
         navigate('/admin');
       } else {
         throw Error;
@@ -40,7 +48,7 @@ const AuthorizationForm: React.FC = () => {
           <p>Пароль</p>
           <input type="password" placeholder="Пароль" {...register('password')} />
         </label>
-        <button className="authorization-form__btn" type="submit">
+        <button className="btn authorization-form__btn" type="submit">
           Авторизоваться
         </button>
       </div>

@@ -1,0 +1,80 @@
+.hall-params__managment {
+  width: 100%;
+}
+
+.hall-params__configurate {
+  position: relative;
+  padding: 35px 32px 36px 104px;
+  background-color: rgba(234, 233, 235, 0.95);
+  transform: translateY(0px);
+  animation: fadeSlideDown 0.4s ease-out forwards;
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hall-params__configurate p {
+  margin-bottom: 10px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+
+.hall-params__list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-bottom: 5px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+  list-style-type: none;
+}
+
+.hall-params__btn-remove {
+  box-sizing: content-box;
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  padding: 4px;
+  border: none;
+  background-color: #fff;
+  background-image: url('./img/__before\ \(1\).png');
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 3px;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+}
+
+.hall-params__create-hall {
+  margin-top: 5px;
+
+  animation: fadeSlideDown 0.4s ease-out forwards;
+}
+
+.hall-params__create-hall label {
+  max-width: 159px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}

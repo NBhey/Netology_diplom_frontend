@@ -1,28 +1,125 @@
-import { useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { api } from '../../api/api';
-import { ApiResponse } from '@/types/apiType';
+import { ApiResponse, Hall } from '@/types/apiType';
+import './ManagmentHall.css';
+import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
 
 const ManagmentHall: React.FC = () => {
-  const [halls, setHall] = useState<string[] | null>(null);
+  const [halls, setHall] = useState<Array<Hall> | null>(null);
+  const [arrowContent, setArrowContent] = useState<boolean>(false);
+  const [modalWindow, setModalWindow] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!window.sessionStorage.getItem('admin')) {
+      navigate('/authorization');
+    }
     async function getData() {
       const {
         result: { halls },
       } = await api.get<ApiResponse>('/alldata');
 
-      const data = halls.reduce((acc, element) => {
-        acc.push(element.hall_name);
-        return acc;
-      }, [] as string[]);
-      setHall(data);
+      setHall(halls);
     }
     getData();
-  }, []);
+  }, [navigate]);
 
-  console.log(halls);
+  const handleClickForOpenHallConfig = (event: React.MouseEvent<HTMLImageElement>) => {
+    setArrowContent(!arrowContent);
+    if (modalWindow === true) {
+      setModalWindow(false);
+    }
+  };
 
-  return <></>;
+  const handleAddNewHall = () => {
+    setModalWindow(!modalWindow);
+  };
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    try {
+      const {
+        result: { halls },
+      } = await api.post<ApiResponse, { hallName: string }>('/hall', {
+        hallName: `зал ${inputRef.current?.value}`,
+      });
+
+      setHall(halls);
+
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmitDeleteHall = async (id: number, hall_name: string) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm(`Вы точно хотите удалить ${hall_name}`)) {
+      try {
+        const {
+          result: { halls },
+        } = await api.delete<ApiResponse>(id);
+        setHall(halls);
+      } catch (error) {
+        console.log('Удаление', error);
+      }
+    }
+  };
+
+  return (
+    <section className="hall-params__managment">
+      <HeaderForSectionInAdminPanel
+        title="Управление залами"
+        handleCLick={handleClickForOpenHallConfig}
+        arrowContent={arrowContent}
+      />
+
+      {arrowContent ? (
+        <div className="hall-params__configurate">
+          <p>Доступные залы:</p>
+          <ul className="hall-params__list">
+            {halls?.map((hall, i) => {
+              return (
+                <li key={hall.id}>
+                  {' '}
+                  - {hall.hall_name}{' '}
+                  <button
+                    onClick={() => handleSubmitDeleteHall(hall.id, hall.hall_name)}
+                    className="hall-params__btn-remove"
+                    type="button"
+                  ></button>
+                </li>
+              );
+            })}
+          </ul>
+          <button className="btn" onClick={handleAddNewHall}>
+            {' '}
+            {modalWindow ? 'Закрыть' : 'Создать зал'}{' '}
+          </button>
+          {modalWindow ? (
+            <form className="hall-params__create-hall" action="" onSubmit={handleSubmit}>
+              <label htmlFor="hall">
+                <span>Зал</span>{' '}
+                <input
+                  ref={inputRef}
+                  name="hall"
+                  type="number"
+                  min={0}
+                  placeholder="Укажите номер зала"
+                  required
+                />
+                <button className="btn"> Отправить </button>
+              </label>
+            </form>
+          ) : null}
+        </div>
+      ) : null}
+    </section>
+  );
 };
 
 export default ManagmentHall;
