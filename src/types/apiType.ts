@@ -13,6 +13,9 @@ export interface Hall {
   hall_rows: number;
   hall_places: number;
   hall_config: [];
+  hall_open: number;
+  hall_price_standart: number;
+  hall_price_vip: number;
 }
 
 export interface Seance {

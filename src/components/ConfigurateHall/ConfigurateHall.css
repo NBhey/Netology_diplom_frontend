@@ -1,0 +1,43 @@
+.hall-list {
+  display: flex;
+  gap: 10px;
+
+  list-style-type: none;
+}
+
+.hall-list button {
+  text-transform: capitalize;
+}
+
+.hall-price__configurate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hall-price__configurate label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.hall-price__configurate input {
+  width: 100px;
+  height: 36px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
