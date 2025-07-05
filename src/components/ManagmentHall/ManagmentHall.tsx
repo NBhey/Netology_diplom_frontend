@@ -1,7 +1,7 @@
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { api } from '../../api/api';
-import { ApiResponse, Hall } from '@/types/apiType';
+import { ApiResponse } from '@/types/apiType';
 import './ManagmentHall.css';
 import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
 import { useHalls } from '../../contexts/HallsContext';

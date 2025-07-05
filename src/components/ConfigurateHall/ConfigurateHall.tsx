@@ -1,4 +1,3 @@
-import { api } from '../../api/api';
 import { Hall } from '@/types/apiType';
 import { useEffect, useState } from 'react';
 import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
@@ -11,6 +10,7 @@ import { useHalls } from '../../contexts/HallsContext';
 const ConfigurateHall: React.FC = () => {
   const [arrowContent, setArrowContent] = useState<boolean>(false);
   const [modalWindow, setModalWindow] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { halls, setHalls } = useHalls();
   const [currentHall, setCurrentHall] = useState<Hall | null>(null);
 
