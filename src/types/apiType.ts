@@ -12,7 +12,7 @@ export interface Hall {
   hall_name: string;
   hall_rows: number;
   hall_places: number;
-  hall_config: [];
+  hall_config: Array<Array<string>>;
   hall_open: number;
   hall_price_standart: number;
   hall_price_vip: number;

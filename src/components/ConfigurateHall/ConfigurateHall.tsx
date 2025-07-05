@@ -3,9 +3,9 @@ import { ApiResponse, Hall } from '@/types/apiType';
 import { useEffect, useState } from 'react';
 import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
 import './ConfigurateHall.css';
-import standrt from './img/standart_places.png'
-import vip from './img/vip_places.png'
-import block from './img/block_places.png'
+import standart from './img/standart_places.png';
+import vip from './img/vip_places.png';
+import block from './img/block_places.png';
 
 const ConfigurateHall: React.FC = () => {
   const [arrowContent, setArrowContent] = useState<boolean>(false);
@@ -18,10 +18,8 @@ const ConfigurateHall: React.FC = () => {
       const {
         result: { halls },
       } = await api.get<ApiResponse>('/alldata');
-      console.log('я halls', halls);
       setData(halls);
       setCurrentHall(halls[0]);
-      // console.log(currentHall)
     }
 
     getData();
@@ -39,6 +37,8 @@ const ConfigurateHall: React.FC = () => {
     console.log(halls[index]);
   };
   console.log(currentHall);
+  console.log(currentHall?.hall_config[0]);
+
   return (
     <section>
       <HeaderForSectionInAdminPanel
@@ -72,12 +72,46 @@ const ConfigurateHall: React.FC = () => {
               </label>
             </div>
           </div>
-          <div className="hall-sheme">
+          <div className="hall-sheme-description">
             <p>Теперь вы можете указать типы кресел на схеме зада: </p>
-            <span><img src={standrt} alt="standart" /> - обычные кресла</span>
-            <span><img src={vip} alt="vip" /> - VIP кресла</span>
-            <span><img src={block} alt="block"/> - заблокированные (нет кресла)</span>
+            <div className="hall-sheme__description-place">
+              <span>
+                <img src={standart} alt="standart" /> - обычные кресла
+              </span>
+              <span>
+                <img src={vip} alt="vip" /> - VIP кресла
+              </span>
+              <span>
+                <img src={block} alt="block" /> - заблокированные (нет кресла)
+              </span>
+            </div>
           </div>
+          <table className="hall-sheme">
+            <caption>Экран</caption>
+            <tbody>
+              {currentHall?.hall_config.map((row, index) => {
+                return (
+                  <tr>
+                    {currentHall?.hall_config[index].map((place: string) => {
+                      return place === 'standart' ? (
+                        <td>
+                          <img src={standart} alt="standart" />
+                        </td>
+                      ) : place === 'vip' ? (
+                        <td>
+                          <img src={vip} alt="vip" />
+                        </td>
+                      ) : (
+                        <td>
+                          <img src={block} alt="block" />{' '}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       ) : null}
     </section>

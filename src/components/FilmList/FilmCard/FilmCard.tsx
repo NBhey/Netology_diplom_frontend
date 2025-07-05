@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 import './FilmCard.css';
-
+// TODO Вынести в файл с типами или удалить, в общем и целом обрати на это внимание 
 interface Film {
   id: number;
   film_name: string;
@@ -15,7 +15,7 @@ interface Hall {
   hall_name: string;
   hall_rows: number;
   hall_places: number;
-  hall_config: [];
+  hall_config: Array<Array<string>>;
 }
 
 interface Seance {

@@ -41,3 +41,36 @@
   letter-spacing: 0%;
   vertical-align: middle;
 }
+/* 
+.hall-sheme p {
+  display: flex;
+  align-items: center;
+} */
+
+.hall-sheme__description-place {
+  display: flex;
+  flex-wrap: wrap;
+    align-items: center;
+  gap: 5px;
+}
+
+.hall-sheme__description-place span {
+  display: flex;
+    align-items: center;
+
+}
+
+.hall-sheme {
+  margin: 0 auto;
+}
+
+.hall-sheme tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hall-sheme tbody tr{
+  display: flex;
+  gap: 5px;
+}
