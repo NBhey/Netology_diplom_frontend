@@ -1,22 +1,26 @@
-import { createContext, useContext, useState } from 'react';
-import { ApiResponse, Hall } from '@/types/apiType';
-import { api } from '@/api/api';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { ApiResponse, Hall, HallsContextType } from '@/types/apiType';
+import { api } from '../api/api';
 
-const HallsContext = createContext<Array<Hall> | undefined>(undefined);
+const HallsContext = createContext<HallsContextType>({ halls: [], setHalls: () => {} });
 
-export const HallsProvider: React.FC = () => {
-  const [data, setData] = useState<Array<Hall> | undefined>(undefined);
-  async function getData() {
-    const {
-      result: { halls },
-    } = await api.get<ApiResponse>('/alldata');
-    setData(halls)
-  }
-  getData()
-  return <HallsContext.Provider value={data}></HallsContext.Provider>;
+export const HallsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [halls, setHalls] = useState<Array<Hall>>([]);
+
+  useEffect(() => {
+    async function getData() {
+      const {
+        result: { halls },
+      } = await api.get<ApiResponse>('/alldata');
+      setHalls(halls);
+    }
+    getData();
+  }, []);
+
+  return <HallsContext.Provider value={{ halls, setHalls }}> {children} </HallsContext.Provider>;
 };
 
 export const useHalls = () => {
-    const context = useContext(HallsContext)
-    return context
-}
+  const context = useContext(HallsContext);
+  return context;
+};

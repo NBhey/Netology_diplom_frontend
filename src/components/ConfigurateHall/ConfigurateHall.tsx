@@ -1,29 +1,22 @@
 import { api } from '../../api/api';
-import { ApiResponse, Hall } from '@/types/apiType';
+import { Hall } from '@/types/apiType';
 import { useEffect, useState } from 'react';
 import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
 import './ConfigurateHall.css';
 import standart from './img/standart_places.png';
 import vip from './img/vip_places.png';
 import block from './img/block_places.png';
+import { useHalls } from '../../contexts/HallsContext';
 
 const ConfigurateHall: React.FC = () => {
   const [arrowContent, setArrowContent] = useState<boolean>(false);
   const [modalWindow, setModalWindow] = useState<boolean>(false);
-  const [halls, setData] = useState<Array<Hall>>([]);
+  const { halls, setHalls } = useHalls();
   const [currentHall, setCurrentHall] = useState<Hall | null>(null);
 
   useEffect(() => {
-    async function getData() {
-      const {
-        result: { halls },
-      } = await api.get<ApiResponse>('/alldata');
-      setData(halls);
-      setCurrentHall(halls[0]);
-    }
-
-    getData();
-  }, []);
+    setCurrentHall(halls[0]);
+  }, [halls]);
 
   const handleClickForOpenHallConfig = (event: React.MouseEvent<HTMLImageElement>) => {
     setArrowContent(!arrowContent);
@@ -34,10 +27,7 @@ const ConfigurateHall: React.FC = () => {
 
   const handleClickForChangeHall = (index: number) => {
     setCurrentHall(halls[index]);
-    console.log(halls[index]);
   };
-  console.log(currentHall);
-  console.log(currentHall?.hall_config[0]);
 
   return (
     <section>
@@ -91,19 +81,19 @@ const ConfigurateHall: React.FC = () => {
             <tbody>
               {currentHall?.hall_config.map((row, index) => {
                 return (
-                  <tr>
-                    {currentHall?.hall_config[index].map((place: string) => {
+                  <tr key={index}>
+                    {currentHall?.hall_config[index].map((place: string, i) => {
                       return place === 'standart' ? (
-                        <td>
+                        <td key={`${index}-${place}-${i}`}>
                           <img src={standart} alt="standart" />
                         </td>
                       ) : place === 'vip' ? (
-                        <td>
+                        <td key={`${index}-${place}-${i}`}>
                           <img src={vip} alt="vip" />
                         </td>
                       ) : (
-                        <td>
-                          <img src={block} alt="block" />{' '}
+                        <td key={`${index}-${place}-${i}`}>
+                          <img src={block} alt="block" />
                         </td>
                       );
                     })}

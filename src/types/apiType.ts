@@ -38,3 +38,8 @@ export interface inputHeaderForSectionInAdminPanel {
   arrowContent: boolean;
   handleCLick: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
+
+export interface HallsContextType  {
+  halls: Array<Hall> | [];
+  setHalls: React.Dispatch<React.SetStateAction<Hall[]>>;
+};
