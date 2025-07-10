@@ -29,6 +29,30 @@ const ConfigurateHall: React.FC = () => {
     setCurrentHall(halls[index]);
   };
 
+  const handleChangeRow = (allRowNumber: number) => {
+    if (allRowNumber < 0) return;
+    setCurrentHall((prevState) => {
+      if (!prevState) return null;
+      return {
+        ...prevState,
+        hall_rows: allRowNumber !== undefined ? allRowNumber : prevState.hall_rows,
+      };
+    });
+  };
+
+  const handleChangePlaces = (allPlacesNumber:number)=>{
+    console.log(allPlacesNumber)
+    if (allPlacesNumber < 0) return;
+    setCurrentHall((prevState) => {
+      if (!prevState) return null;
+      return {
+        ...prevState,
+        hall_places: allPlacesNumber !== undefined ? allPlacesNumber : prevState.hall_places,
+      };
+    });
+    console.log(currentHall)
+  }
+
   return (
     <section>
       <HeaderForSectionInAdminPanel
@@ -53,12 +77,23 @@ const ConfigurateHall: React.FC = () => {
             <div className="hall-price__configurate">
               <label>
                 <span>Рядов, шт</span>
-                <input type="number" min={0} placeholder={`${currentHall?.hall_rows}`} />
+                <input
+                  onKeyDown={(e) => e.preventDefault()}
+                  onChange={(e) => {
+                    handleChangeRow(+e.target.value);
+                  }}
+                  type="number"
+                  min={1}
+                  max={10}
+                  value={currentHall?.hall_rows}
+                />
               </label>
               <span>x</span>
               <label>
                 <span>Мест, шт </span>
-                <input type="number" min={0} placeholder={`${currentHall?.hall_places}`} />
+                <input type="number" min={1} max={10} value={currentHall?.hall_places} onKeyDown={(e) => e.preventDefault()} onChange={(e) => {
+                    handleChangePlaces(+e.target.value);
+                  }}/>
               </label>
             </div>
           </div>
@@ -80,12 +115,14 @@ const ConfigurateHall: React.FC = () => {
             <caption>Экран</caption>
             <tbody>
               {currentHall?.hall_config.map((row, index) => {
+                if (index >= currentHall?.hall_rows) return;
                 return (
                   <tr key={index}>
                     {currentHall?.hall_config[index].map((place: string, i) => {
+                      if (i >= currentHall?.hall_places) return;
                       return place === 'standart' ? (
                         <td key={`${index}-${place}-${i}`}>
-                          <img src={standart} alt="standart" />
+                          <img onClick={() => {}} src={standart} alt="standart" />
                         </td>
                       ) : place === 'vip' ? (
                         <td key={`${index}-${place}-${i}`}>
