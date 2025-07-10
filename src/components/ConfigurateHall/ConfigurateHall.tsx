@@ -4,7 +4,7 @@ import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/Header
 import './ConfigurateHall.css';
 import standart from './img/standart_places.png';
 import vip from './img/vip_places.png';
-import block from './img/block_places.png';
+import disabled from './img/block_places.png';
 import { useHalls } from '../../contexts/HallsContext';
 
 const ConfigurateHall: React.FC = () => {
@@ -40,8 +40,7 @@ const ConfigurateHall: React.FC = () => {
     });
   };
 
-  const handleChangePlaces = (allPlacesNumber:number)=>{
-    console.log(allPlacesNumber)
+  const handleChangePlaces = (allPlacesNumber: number) => {
     if (allPlacesNumber < 0) return;
     setCurrentHall((prevState) => {
       if (!prevState) return null;
@@ -50,8 +49,32 @@ const ConfigurateHall: React.FC = () => {
         hall_places: allPlacesNumber !== undefined ? allPlacesNumber : prevState.hall_places,
       };
     });
-    console.log(currentHall)
-  }
+  };
+
+  const handleChangeStatusPlaces = (row: number, places: number) => {
+    console.log(row, places);
+   
+    setCurrentHall((prevState) => {
+      if (!prevState) return null;
+      return {
+        ...prevState,
+        hall_config: prevState.hall_config.map((r, rIndex) => {
+          if (rIndex === row) {
+           return r.map((p, pIndex) => {
+              if (pIndex === places && p === 'standart') return 'vip';
+              if (pIndex === places && p === 'vip') return 'disabled';
+              if (pIndex === places && p === 'disabled') return 'standart';
+              return p
+            });
+          }
+          return r
+        }),
+      };
+    });
+        console.log(currentHall);
+         console.log(currentHall?.hall_config[row][places]);
+
+  };
 
   return (
     <section>
@@ -91,9 +114,16 @@ const ConfigurateHall: React.FC = () => {
               <span>x</span>
               <label>
                 <span>Мест, шт </span>
-                <input type="number" min={1} max={10} value={currentHall?.hall_places} onKeyDown={(e) => e.preventDefault()} onChange={(e) => {
+                <input
+                  type="number"
+                  min={1}
+                  max={10}
+                  value={currentHall?.hall_places}
+                  onKeyDown={(e) => e.preventDefault()}
+                  onChange={(e) => {
                     handleChangePlaces(+e.target.value);
-                  }}/>
+                  }}
+                />
               </label>
             </div>
           </div>
@@ -107,30 +137,48 @@ const ConfigurateHall: React.FC = () => {
                 <img src={vip} alt="vip" /> - VIP кресла
               </span>
               <span>
-                <img src={block} alt="block" /> - заблокированные (нет кресла)
+                <img src={disabled} alt="disabled" /> - заблокированные (нет кресла)
               </span>
             </div>
           </div>
           <table className="hall-sheme">
             <caption>Экран</caption>
             <tbody>
-              {currentHall?.hall_config.map((row, index) => {
-                if (index >= currentHall?.hall_rows) return;
+              {currentHall?.hall_config.map((row, rowIndex) => {
+                if (rowIndex >= currentHall?.hall_rows) return;
                 return (
-                  <tr key={index}>
-                    {currentHall?.hall_config[index].map((place: string, i) => {
-                      if (i >= currentHall?.hall_places) return;
+                  <tr key={rowIndex}>
+                    {currentHall?.hall_config[rowIndex].map((place: string, placesIndex) => {
+                      if (placesIndex >= currentHall?.hall_places) return;
                       return place === 'standart' ? (
-                        <td key={`${index}-${place}-${i}`}>
-                          <img onClick={() => {}} src={standart} alt="standart" />
+                        <td key={`${rowIndex}-${place}-${placesIndex}`}>
+                          <img
+                            onClick={() => {
+                              handleChangeStatusPlaces(rowIndex, placesIndex);
+                            }}
+                            src={standart}
+                            alt="standart"
+                          />
                         </td>
                       ) : place === 'vip' ? (
-                        <td key={`${index}-${place}-${i}`}>
-                          <img src={vip} alt="vip" />
+                        <td key={`${rowIndex}-${place}-${placesIndex}`}>
+                          <img
+                            onClick={() => {
+                              handleChangeStatusPlaces(rowIndex, placesIndex);
+                            }}
+                            src={vip}
+                            alt="vip"
+                          />
                         </td>
                       ) : (
-                        <td key={`${index}-${place}-${i}`}>
-                          <img src={block} alt="block" />
+                        <td key={`${rowIndex}-${place}-${placesIndex}`}>
+                          <img
+                            onClick={() => {
+                              handleChangeStatusPlaces(rowIndex, placesIndex);
+                            }}
+                            src={disabled}
+                            alt="disabled"
+                          />
                         </td>
                       );
                     })}
