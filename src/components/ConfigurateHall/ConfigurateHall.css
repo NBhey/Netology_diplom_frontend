@@ -1,14 +1,26 @@
 .hall-list {
   display: flex;
-  gap: 10px;
 
   list-style-type: none;
 }
 
-.hall-list button {
+.hall-list__btn {
   text-transform: capitalize;
+  border: none;
+  padding: 13px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #ffffff73;
+  border-radius: 3px;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+  cursor: pointer;
 }
-
+.hall-list__btn-active {
+  font-weight: 700;
+  font-size: 15px;
+}
 .hall-price__configurate {
   display: flex;
   align-items: center;
@@ -45,14 +57,13 @@
 .hall-sheme__description-place {
   display: flex;
   flex-wrap: wrap;
-    align-items: center;
+  align-items: center;
   gap: 5px;
 }
 
 .hall-sheme__description-place span {
   display: flex;
-    align-items: center;
-
+  align-items: center;
 }
 
 .hall-sheme {
@@ -63,9 +74,10 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  height: 355px;
 }
 
-.hall-sheme tbody tr{
+.hall-sheme tbody tr {
   display: flex;
   gap: 5px;
 }
