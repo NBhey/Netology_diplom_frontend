@@ -1,0 +1,88 @@
+.hall-list {
+  display: flex;
+
+  list-style-type: none;
+}
+
+.hall-list__btn {
+  text-transform: capitalize;
+  border: none;
+  padding: 13px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #ffffff73;
+  border-radius: 3px;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+  cursor: pointer;
+}
+.hall-list__btn-active {
+  font-weight: 700;
+  font-size: 15px;
+}
+.hall-price__configurate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hall-price__configurate label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.hall-price__configurate input {
+  width: 100px;
+  height: 36px;
+
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.hall-sheme__description-place {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.hall-sheme__description-place span {
+  display: flex;
+  align-items: center;
+}
+
+.hall-sheme {
+  margin: 0 auto;
+}
+
+.hall-sheme tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 355px;
+}
+
+.hall-sheme tbody tr {
+  display: flex;
+  gap: 5px;
+}
+
+.btn_cancel {
+  background-color: rgba(255, 255, 255, 1);
+  color:rgba(99, 83, 108, 1);
+}

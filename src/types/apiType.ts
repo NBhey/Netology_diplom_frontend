@@ -12,7 +12,10 @@ export interface Hall {
   hall_name: string;
   hall_rows: number;
   hall_places: number;
-  hall_config: [];
+  hall_config: Array<Array<string>>;
+  hall_open: number;
+  hall_price_standart: number;
+  hall_price_vip: number;
 }
 
 export interface Seance {
@@ -35,3 +38,8 @@ export interface inputHeaderForSectionInAdminPanel {
   arrowContent: boolean;
   handleCLick: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
+
+export interface HallsContextType  {
+  halls: Array<Hall> | [];
+  setHalls: React.Dispatch<React.SetStateAction<Hall[]>>;
+};

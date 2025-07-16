@@ -1,29 +1,22 @@
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { api } from '../../api/api';
-import { ApiResponse, Hall } from '@/types/apiType';
+import { ApiResponse } from '@/types/apiType';
 import './ManagmentHall.css';
 import HeaderForSectionInAdminPanel from '../HeaderForSectionInAdminPanel/HeaderForSectionInAdminPanel';
+import { useHalls } from '../../contexts/HallsContext';
 
 const ManagmentHall: React.FC = () => {
-  const [halls, setHall] = useState<Array<Hall> | null>(null);
   const [arrowContent, setArrowContent] = useState<boolean>(false);
   const [modalWindow, setModalWindow] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { halls, setHalls } = useHalls();
 
   useEffect(() => {
     if (!window.sessionStorage.getItem('admin')) {
       navigate('/authorization');
     }
-    async function getData() {
-      const {
-        result: { halls },
-      } = await api.get<ApiResponse>('/alldata');
-
-      setHall(halls);
-    }
-    getData();
   }, [navigate]);
 
   const handleClickForOpenHallConfig = (event: React.MouseEvent<HTMLImageElement>) => {
@@ -46,7 +39,7 @@ const ManagmentHall: React.FC = () => {
         hallName: `зал ${inputRef.current?.value}`,
       });
 
-      setHall(halls);
+      setHalls(halls);
 
       if (inputRef.current) {
         inputRef.current.value = '';
@@ -63,7 +56,7 @@ const ManagmentHall: React.FC = () => {
         const {
           result: { halls },
         } = await api.delete<ApiResponse>(id);
-        setHall(halls);
+        setHalls(halls);
       } catch (error) {
         console.log('Удаление', error);
       }
