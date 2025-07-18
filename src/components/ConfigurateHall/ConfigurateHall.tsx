@@ -13,26 +13,13 @@ const ConfigurateHall: React.FC = () => {
   // eslint-disable-next-line
   const { halls, setHalls } = useHalls();
   const [currentHall, setCurrentHall] = useState<Hall | null>(null);
-  const [initialHall, setInitialHall] = useState<Hall | null>(null);
   const [activeHall, setActiveHall] = useState<number>(0);
   // eslint-disable-next-line
   const [currentRow, setCurrentRow] = useState<number>(0);
 
   useEffect(() => {
     if (halls.length > 0) {
-      const hall = halls[0];
-      // Проверяем и инициализируем hall_config если он не соответствует размерам зала
-      if (!hall.hall_config || hall.hall_config.length !== hall.hall_rows || 
-          (hall.hall_config.length > 0 && hall.hall_config[0].length !== hall.hall_places)) {
-        const newConfig = Array(hall.hall_rows).fill(0).map(() => 
-          Array(hall.hall_places).fill('standart')
-        );
-        setCurrentHall({...hall, hall_config: newConfig});
-        setInitialHall({...hall, hall_config: newConfig});
-      } else {
-        setCurrentHall(hall);
-        setInitialHall(hall);
-      }
+      setCurrentHall(halls[0]);
     }
   }, [halls]);
 
@@ -49,80 +36,37 @@ const ConfigurateHall: React.FC = () => {
     }
   };
 
-  const handleClickForChangeHall = useCallback(
-    (index: number) => {
-      const hall = halls[index];
-      // Проверяем и инициализируем hall_config если он не соответствует размерам зала
-      if (!hall.hall_config || hall.hall_config.length !== hall.hall_rows || 
-          (hall.hall_config.length > 0 && hall.hall_config[0].length !== hall.hall_places)) {
-        const newConfig = Array(hall.hall_rows).fill(0).map(() => 
-          Array(hall.hall_places).fill('standart')
-        );
-        setCurrentHall({...hall, hall_config: newConfig});
-        setInitialHall({...hall, hall_config: newConfig});
-      } else {
-        setCurrentHall(hall);
-        setInitialHall(hall);
-      }
-      setActiveHall(index);
-    },
-    [halls],
-  );
+  const handleClickForChangeHall = useCallback((index: number) => {
+    setCurrentHall(halls[index]);
+    setActiveHall(index);
+  }, [halls]);
 
   const handleChangeRow = useCallback((allRowNumber: number) => {
     if (allRowNumber < 0) return;
-
-    setCurrentHall((prevState) => {
+    
+    setCurrentRow(allRowNumber);
+    setCurrentHall(prevState => {
       if (!prevState) return null;
-      
-      // Создаем новую конфигурацию с обновленным количеством рядов
-      const newConfig = [];
-      for (let i = 0; i < allRowNumber; i++) {
-        // Если ряд уже существует, используем его, иначе создаем новый ряд
-        if (i < prevState.hall_config.length) {
-          newConfig.push([...prevState.hall_config[i]]);
-        } else {
-          // Создаем новый ряд с текущим количеством мест
-          newConfig.push(Array(prevState.hall_places).fill('standart'));
-        }
-      }
-      
       return {
         ...prevState,
         hall_rows: allRowNumber,
-        hall_config: newConfig,
       };
     });
   }, []);
 
   const handleChangePlaces = useCallback((allPlacesNumber: number) => {
     if (allPlacesNumber < 0) return;
-    
-    setCurrentHall((prevState) => {
+    setCurrentHall(prevState => {
       if (!prevState) return null;
-      
-      // Обновляем каждый ряд, добавляя или удаляя места
-      const newConfig = prevState.hall_config.map(row => {
-        if (row.length < allPlacesNumber) {
-          // Добавляем новые места (по умолчанию 'standart')
-          return [...row, ...Array(allPlacesNumber - row.length).fill('standart')];
-        } else if (row.length > allPlacesNumber) {
-          // Удаляем лишние места
-          return row.slice(0, allPlacesNumber);
-        }
-        return row;
-      });
-      
       return {
         ...prevState,
         hall_places: allPlacesNumber,
-        hall_config: newConfig,
       };
     });
   }, []);
 
   const handleChangeStatusPlaces = useCallback((row: number, places: number) => {
-    setCurrentHall((prevState) => {
+    setCurrentHall(prevState => {
       if (!prevState) return null;
       return {
         ...prevState,
@@ -143,7 +87,7 @@ const ConfigurateHall: React.FC = () => {
 
   const renderHallScheme = useCallback(() => {
     if (!currentHall) return [];
-
+    
     const rows: JSX.Element[] = [];
     for (let rowIndex = 0; rowIndex < currentHall.hall_rows; rowIndex++) {
       const cells: JSX.Element[] = [];
@@ -176,7 +120,7 @@ const ConfigurateHall: React.FC = () => {
               src={imgSrc}
               alt={imgAlt}
             />
-          </td>,
+          </td>
         );
       }
 
@@ -185,10 +129,6 @@ const ConfigurateHall: React.FC = () => {
 
     return rows;
   }, [currentHall, handleChangeStatusPlaces]);
-
-  const handleCancelAllChangeForHall = () => {
-    setCurrentHall(initialHall);
-  };
 
   return (
     <section>
@@ -243,28 +183,18 @@ const ConfigurateHall: React.FC = () => {
           <div className="hall-sheme-description">
             <p>Теперь вы можете указать типы кресел на схеме зала:</p>
             <div className="hall-sheme__description-place">
-              <span>
-                <img src={standart} alt="standart" /> - обычные кресла
-              </span>
-              <span>
-                <img src={vip} alt="vip" /> - VIP кресла
-              </span>
-              <span>
-                <img src={disabled} alt="disabled" /> - заблокированные (нет кресла)
-              </span>
+              <span><img src={standart} alt="standart" /> - обычные кресла</span>
+              <span><img src={vip} alt="vip" /> - VIP кресла</span>
+              <span><img src={disabled} alt="disabled" /> - заблокированные (нет кресла)</span>
             </div>
             <p>Чтобы изменить вид кресла кликните по нему левой кнопкой мыши</p>
           </div>
           <table className="hall-sheme">
             <caption>Экран</caption>
-            <tbody>{renderHallScheme()}</tbody>
+            <tbody>
+              {renderHallScheme()}
+            </tbody>
           </table>
-          <div style={{ margin: '0 auto', textAlign: 'center' }}>
-            <button className="btn btn_cancel" onClick={handleCancelAllChangeForHall}>
-              Отмена
-            </button>
-            <button className="btn">Сохранить</button>
-          </div>
         </div>
       )}
     </section>
