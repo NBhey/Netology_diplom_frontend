@@ -6,6 +6,7 @@ import standart from './img/standart_places.png';
 import vip from './img/vip_places.png';
 import disabled from './img/block_places.png';
 import { useHalls } from '../../contexts/HallsContext';
+import { api } from '../../api/api';
 
 const ConfigurateHall: React.FC = () => {
   const [arrowContent, setArrowContent] = useState<boolean>(false);
@@ -23,12 +24,6 @@ const ConfigurateHall: React.FC = () => {
     }
   }, [halls]);
 
-  useEffect(() => {
-    if (currentHall) {
-      setCurrentRow(currentHall.hall_rows);
-    }
-  }, [currentHall]);
-
   const handleClickForOpenHallConfig = (event: React.MouseEvent<HTMLImageElement>) => {
     setArrowContent(!arrowContent);
     if (modalWindow) {
@@ -36,16 +31,19 @@ const ConfigurateHall: React.FC = () => {
     }
   };
 
-  const handleClickForChangeHall = useCallback((index: number) => {
-    setCurrentHall(halls[index]);
-    setActiveHall(index);
-  }, [halls]);
+  const handleClickForChangeHall = useCallback(
+    (index: number) => {
+      setCurrentHall(halls[index]);
+      setActiveHall(index);
+    },
+    [halls],
+  );
 
   const handleChangeRow = useCallback((allRowNumber: number) => {
     if (allRowNumber < 0) return;
-    
+
     setCurrentRow(allRowNumber);
-    setCurrentHall(prevState => {
+    setCurrentHall((prevState) => {
       if (!prevState) return null;
       return {
         ...prevState,
@@ -56,7 +54,7 @@ const ConfigurateHall: React.FC = () => {
 
   const handleChangePlaces = useCallback((allPlacesNumber: number) => {
     if (allPlacesNumber < 0) return;
-    setCurrentHall(prevState => {
+    setCurrentHall((prevState) => {
       if (!prevState) return null;
       return {
         ...prevState,
@@ -66,7 +64,7 @@ const ConfigurateHall: React.FC = () => {
   }, []);
 
   const handleChangeStatusPlaces = useCallback((row: number, places: number) => {
-    setCurrentHall(prevState => {
+    setCurrentHall((prevState) => {
       if (!prevState) return null;
       return {
         ...prevState,
@@ -87,7 +85,7 @@ const ConfigurateHall: React.FC = () => {
 
   const renderHallScheme = useCallback(() => {
     if (!currentHall) return [];
-    
+
     const rows: JSX.Element[] = [];
     for (let rowIndex = 0; rowIndex < currentHall.hall_rows; rowIndex++) {
       const cells: JSX.Element[] = [];
@@ -120,7 +118,7 @@ const ConfigurateHall: React.FC = () => {
               src={imgSrc}
               alt={imgAlt}
             />
-          </td>
+          </td>,
         );
       }
 
@@ -129,6 +127,25 @@ const ConfigurateHall: React.FC = () => {
 
     return rows;
   }, [currentHall, handleChangeStatusPlaces]);
+
+  const handleCancelConfigurateHall = () => {
+    setCurrentHall(halls[activeHall]);
+  };
+
+  const handleClickAndSubmitNewCurrentHallConfigurate = async () => {
+    try {
+      const result = await api.post(`/hall/${currentHall?.id}`, {
+        rowCount: `${currentHall?.hall_rows}`,
+        placeCount: `${currentHall?.hall_places}`,
+        config: `${currentHall?.hall_rows}`,
+      });
+      console.log(result)
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(currentHall);
+  };
 
   return (
     <section>
@@ -183,18 +200,30 @@ const ConfigurateHall: React.FC = () => {
           <div className="hall-sheme-description">
             <p>Теперь вы можете указать типы кресел на схеме зала:</p>
             <div className="hall-sheme__description-place">
-              <span><img src={standart} alt="standart" /> - обычные кресла</span>
-              <span><img src={vip} alt="vip" /> - VIP кресла</span>
-              <span><img src={disabled} alt="disabled" /> - заблокированные (нет кресла)</span>
+              <span>
+                <img src={standart} alt="standart" /> - обычные кресла
+              </span>
+              <span>
+                <img src={vip} alt="vip" /> - VIP кресла
+              </span>
+              <span>
+                <img src={disabled} alt="disabled" /> - заблокированные (нет кресла)
+              </span>
             </div>
             <p>Чтобы изменить вид кресла кликните по нему левой кнопкой мыши</p>
           </div>
           <table className="hall-sheme">
             <caption>Экран</caption>
-            <tbody>
-              {renderHallScheme()}
-            </tbody>
+            <tbody>{renderHallScheme()}</tbody>
           </table>
+          <div style={{ textAlign: 'center' }}>
+            <button className="btn" onClick={handleCancelConfigurateHall}>
+              Отмена
+            </button>
+            <button className="btn" onClick={handleClickAndSubmitNewCurrentHallConfigurate}>
+              Сохранить
+            </button>
+          </div>
         </div>
       )}
     </section>
