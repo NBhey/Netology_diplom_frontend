@@ -17,6 +17,7 @@ const AuthorizationForm: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('1')
     if (window.sessionStorage.getItem('admin')) {
       navigate('/admin');
     }

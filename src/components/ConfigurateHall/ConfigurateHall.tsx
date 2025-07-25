@@ -133,18 +133,26 @@ const ConfigurateHall: React.FC = () => {
   };
 
   const handleClickAndSubmitNewCurrentHallConfigurate = async () => {
+    if (!currentHall) {
+      console.error('currentHall is undefined');
+      return;
+    }
+    const hallForSend: Array<Array<string>> = [];
+    for (let i = 0; i < (currentHall?.hall_rows || 0); i += 1) {
+      hallForSend.push([]);
+      for (let j = 0; j < (currentHall?.hall_places || 0); j += 1) {
+        hallForSend[i].push(currentHall?.hall_config[i][j]);
+      }
+    }
     try {
-      const result = await api.post(`/hall/${currentHall?.id}`, {
+      await api.post(`/hall/${currentHall?.id}`, {
         rowCount: `${currentHall?.hall_rows}`,
         placeCount: `${currentHall?.hall_places}`,
-        config: `${currentHall?.hall_rows}`,
+        config: JSON.stringify(hallForSend),
       });
-      console.log(result)
     } catch (error) {
       console.log(error);
     }
-
-    console.log(currentHall);
   };
 
   return (
@@ -217,7 +225,7 @@ const ConfigurateHall: React.FC = () => {
             <tbody>{renderHallScheme()}</tbody>
           </table>
           <div style={{ textAlign: 'center' }}>
-            <button className="btn" onClick={handleCancelConfigurateHall}>
+            <button className="btn btn_cancel" onClick={handleCancelConfigurateHall}>
               Отмена
             </button>
             <button className="btn" onClick={handleClickAndSubmitNewCurrentHallConfigurate}>

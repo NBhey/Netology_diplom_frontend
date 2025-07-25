@@ -41,3 +41,8 @@
   color: #000;
   cursor: pointer;
 }
+
+.btn_cancel {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(99, 83, 108, 1);
+}
