@@ -1,0 +1,10 @@
+.configurate-price__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.configurate-price__form label {
+    display: flex;
+    gap: 5px;
+}
