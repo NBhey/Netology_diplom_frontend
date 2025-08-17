@@ -4,7 +4,7 @@ import './Admin.css';
 import ConfigurateHall from '../../components/ConfigurateHall/ConfigurateHall';
 import { HallsProvider } from '../../contexts/HallsContext';
 import ConfiguratePrice from '../../components/ConfiguratePrice/ConfiguratePrice';
- 
+import GridSession from '../../components/GridSession/GridSession';
 
 const Admin: React.FC = () => {
   return (
@@ -16,6 +16,7 @@ const Admin: React.FC = () => {
             <ManagmentHall />
             <ConfigurateHall />
             <ConfiguratePrice />
+            <GridSession/>
           </div>
         </HallsProvider>
       </div>
